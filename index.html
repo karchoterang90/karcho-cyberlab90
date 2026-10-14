@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10141b">
+<meta name="description" content="Karcho CyberLab — Learn Linux, cybersecurity, ethical hacking and defensive security.">
+<title>Karcho CyberLab | Security Learning</title>
+
+<style>
+:root {
+  --bg: #0b0f14;
+  --panel: #121922;
+  --border: #273442;
+  --green: #55ff99;
+  --blue: #61b8ff;
+  --text: #e6edf3;
+  --muted: #94a3b8;
+  --red: #ff7373;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Consolas, Monaco, monospace;
+}
+
+header {
+  padding: 18px;
+  background: #111821;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--green);
+}
+
+.logo span {
+  color: white;
+}
+
+.badge {
+  border: 1px solid var(--green);
+  color: var(--green);
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+.hero {
+  text-align: center;
+  padding: 38px 16px 25px;
+}
+
+.hero h1 {
+  font-size: clamp(27px, 5vw, 43px);
+  margin-bottom: 12px;
+}
+
+.hero h1 span {
+  color: var(--green);
+}
+
+.hero p {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 650px;
+  margin: auto;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 15px;
+}
+
+.section-title {
+  font-size: 19px;
+  margin: 25px 0 14px;
+}
+
+.section-title span {
+  color: var(--green);
+}
+
+.terminal {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #05090d;
+  box-shadow: 0 12px 35px #0005;
+}
+
+.terminal-head {
+  background: #19232e;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green-dot { background: #27c93f; }
+
+.terminal-body {
+  padding: 17px;
+  min-height: 230px;
+  max-height: 360px;
+  overflow-y: auto;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.output {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #c7d2de;
+  margin-bottom: 10px;
+}
+
+.prompt {
+  color: var(--green);
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-row input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font: inherit;
+  padding: 7px 0;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #1a2734;
+  color: var(--text);
+  padding: 10px 13px;
+  border-radius: 6px;
+  font: inherit;
+}
+
+button:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.primary {
+  background: var(--green);
+  color: #06110a;
+  border-color: var(--green);
+  font-weight: bold;
+}
+
+.primary:hover {
+  background: #9affc1;
+  color: #06110a;
+}
+
+.search {
+  width: 100%;
+  padding: 13px;
+  border-radius: 7px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: white;
+  font: inherit;
+  margin-bottom: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 13px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 16px;
+}
+
+.card h3 {
+  color: var(--green);
+  margin-top: 0;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--blue);
+  border: 1px solid #315477;
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+}
+
+.card a {
+  color: var(--blue);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.notice {
+  margin-top: 22px;
+  padding: 15px;
+  border-left: 3px solid var(--green);
+  background: #14221b;
+  color: #c5e8d1;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 15px;
+  margin-top: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer a {
+  color: var(--green);
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 14px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .terminal-body {
+    padding: 12px;
+  }
+
+  button {
+    padding: 9px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">KARCHO<span> CYBERLAB</span></div>
+  <div class="badge">CYBERSECURITY LEARNING</div>
+</header>
+
+<section class="hero">
+  <h1>Explore the <span>Cyber World</span></h1>
+  <p>
+    Learn Linux commands, explore cybersecurity tools, understand
+    web security and practise ethical hacking in authorized environments.
+  </p>
+</section>
+
+<main class="container">
+
+  <h2 class="section-title"><span>01.</span> Interactive Terminal</h2>
+
+  <div class="terminal">
+    <div class="terminal-head">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green-dot"></div>
+      <span style="margin-left:8px">student@karcholab:~</span>
+    </div>
+
+    <div class="terminal-body" id="terminalBody">
+      <div class="output">Karcho CyberLab Terminal v1.0
+Educational browser simulation — not a real Kali Linux shell.
+
+Type "help" to see available commands.</div>
+
+      <div class="input-row">
+        <span class="prompt">student@karcholab:~$</span>
+        <input id="commandInput" type="text"
+          placeholder="Enter a command..."
+          autocomplete="off" spellcheck="false"
+          aria-label="Terminal command">
+        <button class="primary" id="runButton">Run</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title"><span>02.</span> Security Tool Directory</h2>
+
+  <input
+    class="search"
+    id="toolSearch"
+    type="search"
+    placeholder="Search tools, e.g. Nmap, Wireshark, OWASP..."
+    aria-label="Search security tools">
+
+  <div class="grid" id="toolGrid">
+
+    <article class="card" data-search="nmap network scanning">
+      <span class="tag">NETWORK SECURITY</span>
+      <h3>Nmap</h3>
+      <p>Learn network discovery and port scanning in your own lab.</p>
+      <a href="https://nmap.org/book/man.html" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="wireshark packet network analysis">
+      <span class="tag">NETWORK ANALYSIS</span>
+      <h3>Wireshark</h3>
+      <p>Understand network packets and troubleshoot network traffic.</p>
+      <a href="https://www.wireshark.org/docs/" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="owasp web application security">
+      <span class="tag">WEB SECURITY</span>
+      <h3>OWASP</h3>
+      <p>Study common web application risks and secure coding practices.</p>
+      <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10 ↗</a>
+    </article>
+
+    <article class="card" data-search="burp suite web proxy testing">
+      <span class="tag">WEB TESTING</span>
+      <h3>Burp Suite</h3>
+      <p>Learn how web requests and responses are inspected during authorized testing.</p>
+      <a href="https://portswigger.net/burp/documentation" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="metasploit penetration testing framework">
+      <span class="tag">SECURITY LABS</span>
+      <h3>Metasploit</h3>
+      <p>Learn about penetration-testing workflows in isolated, authorized labs.</p>
+      <a href="https://docs.metasploit.com/" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="john ripper password auditing">
+      <span class="tag">PASSWORD AUDITING</span>
+      <h3>John the Ripper</h3>
+      <p>Understand password-strength auditing using test hashes you own.</p>
+      <a href="https://www.openwall.com/john/doc/" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="kali linux operating system">
+      <span class="tag">LINUX</span>
+      <h3>Kali Linux</h3>
+      <p>Explore the security-focused Linux distribution and its tool ecosystem.</p>
+      <a href="https://www.kali.org/docs/" target="_blank" rel="noopener noreferrer">Official documentation ↗</a>
+    </article>
+
+    <article class="card" data-search="python programming automation">
+      <span class="tag">PROGRAMMING</span>
+      <h3>Python</h3>
+      <p>Learn programming fundamentals and write defensive security utilities.</p>
+      <a href="https://docs.python.org/3/tutorial/" target="_blank" rel="noopener noreferrer">Official tutorial ↗</a>
+    </article>
+
+  </div>
+
+  <h2 class="section-title"><span>03.</span> Practice Labs</h2>
+
+  <div class="grid">
+
+    <article class="card">
+      <h3>PortSwigger Academy</h3>
+      <p>Free interactive web-security labs designed for learning.</p>
+      <a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">Open learning labs ↗</a>
+    </article>
+
+    <article class="card">
+      <h3>OverTheWire</h3>
+      <p>Practise Linux command-line skills through beginner-friendly wargames.</p>
+      <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener noreferrer">Start Bandit ↗</a>
+    </article>
+
+    <article class="card">
+      <h3>TryHackMe</h3>
+      <p>Explore guided cybersecurity learning paths and practice rooms.</p>
+      <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">Explore learning paths ↗</a>
+    </article>
+
+  </div>
+
+  <div class="notice">
+    <strong>Important:</strong> This website is a learning interface, not a
+    real Kali Linux installation. Its terminal runs predefined educational
+    simulations in your browser. It does not execute Linux commands, scan
+    networks or launch external security tools. Only test systems you own
+    or have explicit permission to assess.
+  </div>
+
+</main>
+
+<footer>
+  <p>Karcho CyberLab · Learn ethically. Build securely.</p>
+  <p>Educational project · <a href="https://www.kali.org/docs/" target="_blank" rel="noopener noreferrer">Kali Linux resources</a></p>
+</footer>
+
+<script>
+const input = document.getElementById("commandInput");
+const terminal = document.getElementById("terminalBody");
+const runButton = document.getElementById("runButton");
+
+const commands = {
+  help: `Available educational commands:
+
+help       Show this command list
+about      About Karcho CyberLab
+clear      Clear the terminal
+date       Show the current date
+whoami     Show the simulated username
+pwd        Show the simulated directory
+ls         List simulated learning resources
+tools      List featured security tools
+linux      Explain Linux
+security   Show security learning advice`,
+
+  about: `Karcho CyberLab
+A browser-based cybersecurity learning project.
+This is a simulation, not a real Linux terminal.`,
+
+  whoami: "student",
+
+  pwd: "/home/student",
+
+  ls: `linux-basics/
+network-security/
+web-security/
+python/
+digital-forensics/
+learning-notes/`,
+
+  tools: `Featured learning resources:
+
+Nmap          Network discovery
+Wireshark     Packet analysis
+OWASP         Web application security
+Burp Suite    Web request inspection
+Python        Programming and automation
+Kali Linux    Security-focused Linux distribution
+
+Type "help" for other commands.`,
+
+  linux: `Linux is an operating system widely used on servers,
+developer machines and cybersecurity workstations.
+
+Begin with:
+- Files and directories
+- Permissions
+- Processes
+- Networking basics
+- Package management`,
+
+  security: `Cybersecurity learning checklist:
+
+1. Learn Linux fundamentals.
+2. Understand TCP/IP and DNS.
+3. Study HTML, JavaScript and Python.
+4. Learn secure coding.
+5. Practise in authorized training labs.
+6. Document findings and fixes.`,
+
+  date: new Date().toDateString()
+};
+
+function addOutput(text, command = null) {
+  if (command !== null) {
+    const line = document.createElement("div");
+    line.className = "output";
+
+    const prompt = document.createElement("span");
+    prompt.className = "prompt";
+    prompt.textContent = "student@karcholab:~$ ";
+
+    line.appendChild(prompt);
+    line.appendChild(document.createTextNode(command));
+    terminal.insertBefore(line, terminal.querySelector(".input-row"));
+  }
+
+  if (text) {
+    const output = document.createElement("div");
+    output.className = "output";
+    output.textContent = text;
+    terminal.insertBefore(output, terminal.querySelector(".input-row"));
+  }
+
+  terminal.scrollTop = terminal.scrollHeight;
+}
+
+function runCommand() {
+  const raw = input.value.trim();
+  if (!raw) return;
+
+  const cmd = raw.toLowerCase();
+  input.value = "";
+
+  if (cmd === "clear") {
+    terminal.querySelectorAll(".output").forEach(el => el.remove());
+    return;
+  }
+
+  if (Object.prototype.hasOwnProperty.call(commands, cmd)) {
+    addOutput(commands[cmd], raw);
+  } else {
+    addOutput(
+      `Command not found: ${raw}\nThis educational terminal only supports predefined commands. Type "help".`,
+      raw
+    );
+  }
+
+  input.focus();
+}
+
+runButton.addEventListener("click", runCommand);
+
+input.addEventListener("keydown", event => {
+  if (event.key === "Enter") runCommand();
+});
+
+document.getElementById("toolSearch").addEventListener("input", event => {
+  const query = event.target.value.toLowerCase().trim();
+
+  document.querySelectorAll("#toolGrid .card").forEach(card => {
+    const text = (card.innerText + " " + card.dataset.search).toLowerCase();
+    card.style.display = text.includes(query) ? "" : "none";
+  });
+});
+</script>
+
+</body>
+</html>
